@@ -1,0 +1,20 @@
+version: "3"
+services:
+  app:
+    container_name: node
+    restart: always
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+
+    depends_on:
+      - mongo
+  mongo:
+    container_name: database
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
